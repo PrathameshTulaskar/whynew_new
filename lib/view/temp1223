@@ -1,0 +1,102 @@
+Column(
+              children: [
+                Row(
+                  children: [
+                    Column(
+                      children: [
+                        Container(
+                            decoration: BoxDecoration(
+                              color: greyColordark,
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.only(left:2,top:10),
+                              child: Container(
+                                height: 80,
+                                  width: 80,
+                                child: Image.network(
+                                  "https://www.whynew.in/wp-content/uploads/2019/07/Used-_-Unused-_-Refurbished-18.png",
+                                  
+                                  
+                                ),
+                              ),
+                            ),
+                          ),
+                       Row(mainAxisAlignment:MainAxisAlignment.spaceBetween,
+                         children: [
+                           Container(height:17,width:70,
+                           decoration:BoxDecoration(
+                             border:Border.all(color: Colors.black),color:Colors.white
+
+                           ),
+                           child:Text("12/02/20")),
+                           SizedBox(width:20),
+                           Container(height:30,width:30,
+                           decoration:BoxDecoration(
+                             border:Border.all(color: Colors.black),color:Colors.white
+
+                           ),
+                           ),
+                         ],
+                       ),
+                       
+                      ],
+                    ),
+                    Container(width:MediaQuery.of(context).size.width*0.50,
+                      child: Column(mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          SizedBox(height: 5),
+                          Row(mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Text("Dealer Name:",style:TextStyle(fontSize:16 ) ,),
+                              
+                            ],
+                          ),
+                           SizedBox(height: 5,),
+                          Row(mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              SizedBox(width: 10,),
+                             Icon(Icons.phone),
+                             Text("1234567898")
+                             
+                          ],
+                          ),
+                          Row(mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              SizedBox(width: 10,),
+                             Icon(Icons.mail),
+                             Text("abc@gmail.com"),
+                             
+                          ],
+                          ),
+                          Row(mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              SizedBox(width: 10,),
+                             Icon(Icons.home),
+                             Text("Bldg No.7"),
+                             
+                          ],
+                          ),
+
+    
+
+
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              Row(
+                children: [
+                  FlatButton(height: 46,minWidth: MediaQuery.of(context).size.width*0.489,
+                        color:Colors.green, child:Text("Approve",style: TextStyle(fontSize: 12,color:Colors.white)),
+                        onPressed:(){}),
+                      
+                       
+                 FlatButton(height: 46,
+                   minWidth: MediaQuery.of(context).size.width*0.49,
+                        color:Colors.red, child:Text("Disapprove",style: TextStyle(fontSize: 12,color:Colors.white)),
+                        onPressed:(){}),
+                ],
+              ),
+              ],
+            ),

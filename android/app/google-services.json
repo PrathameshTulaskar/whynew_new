@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "782111949175",
+    "project_id": "whynew-ae3e6",
+    "storage_bucket": "whynew-ae3e6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:782111949175:android:3b84eae9521b47113de172",
+        "android_client_info": {
+          "package_name": "com.whynew.whynewapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "782111949175-0oq25pi1i55dlkpasvajlb2egkkm5lto.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAuXRK-4i3I8QOYh7bcpzAICOkqK6YahSc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "782111949175-0oq25pi1i55dlkpasvajlb2egkkm5lto.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

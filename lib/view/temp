@@ -1,0 +1,182 @@
+import 'package:flutter/material.dart';
+import 'package:whynew_new/widget/color.dart';
+import 'package:whynew_new/widget/profileTile.dart';
+
+class Profile extends StatefulWidget {
+  Profile({Key key}) : super(key: key);
+
+  @override
+  _ProfileState createState() => _ProfileState();
+}
+
+class _ProfileState extends State<Profile> {
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // PageLabel(label: "My Account"),
+          SizedBox(height: 30),
+          ProfileName(),
+          SizedBox(height: 30),
+          ProfileDetailBox(),  
+          SizedBox(height: 20,),
+         
+          SizedBox(height: 20,),
+          ProfileListTile(
+            iconPathSvg: "assets/svg/shopping-bag.svg",
+            title: "My Orders",
+            onClick: () => Navigator.pushNamed(context, '/myOrders'),
+          ),
+          SizedBox(height: 20,),
+          ProfileListTile(
+            iconPathSvg: "assets/svg/map-book.svg",
+            title: "Manage Address",
+            onClick: ()=> Navigator.pushNamed(context, '/manageAddress'),
+          ),
+          SizedBox(height: 30,),
+         
+          SizedBox(height: 20,),
+          LogoutSec(),
+          SizedBox(height: 20,),
+        
+        ],
+        
+      ),
+    );
+  }
+}
+
+class LogoutSec extends StatelessWidget {
+  const LogoutSec({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(left:20,right:20),
+      child: Container(
+        decoration: BoxDecoration(
+        border: Border(
+      bottom: BorderSide(width: 1.0, color: greyColordark)
+        )
+      ),
+        child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(bottom: 20,left:16),
+            child: Text("Logout",style: Theme.of(context).textTheme.subtitle1,),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(right:16),
+            child: Icon(Icons.power_settings_new,color: Colors.red,),
+          )
+        ],
+      ),),
+    );
+  }
+}
+
+class ProfileDetailBox extends StatelessWidget {
+  const ProfileDetailBox({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        decoration: BoxDecoration(
+          color: greyColordark,
+        ),
+        child: Column(
+          children: [
+            Align(alignment: Alignment.centerRight,child: IconButton(icon: Icon(Icons.edit), onPressed: (){print("object");})),
+            // SizedBox(height:5),
+            ProfileSubDetail(
+              icon: Icons.call,
+              label: "Mobile Number:",
+              value: "+91 7038544429",
+            ),
+            ProfileSubDetail(
+              icon: Icons.email,
+              label: "Email:",
+              value: "info@weblozee.com",
+            ),
+            ProfileSubDetail(
+              icon: Icons.date_range,
+              label: "DOB:",
+              value: "25th Jan 1998",
+            ),
+            
+          
+            SizedBox(height:15),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class ProfileSubDetail extends StatelessWidget {
+  final String label;
+  final String value;
+  final IconData icon;
+  const ProfileSubDetail({
+    Key key,
+    this.icon,
+    this.label,
+    this.value
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(left:8.0,right:8.0,bottom:6.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Row(children: [
+            Icon(this.icon,color: Theme.of(context).primaryColor,),
+            SizedBox(width:5),
+            Text(this.label)
+          ],),
+          Text(this.value)
+        ],
+      ),
+    );
+  }
+}
+
+class ProfileName extends StatelessWidget {
+  const ProfileName({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        Container(decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          border: Border.all(
+            color: Theme.of(context).primaryColor,
+            width: 1
+          )
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(7.0),
+          child: Icon(Icons.person,color: Theme.of(context).primaryColor,size: 70,),
+        ),
+        ),
+        Text("Divesh Naik",style: TextStyle(fontSize: 30,fontWeight: FontWeight.w400,color:Theme.of(context).primaryColor)),
+      ],
+    );
+  }
+}

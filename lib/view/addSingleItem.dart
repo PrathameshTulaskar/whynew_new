@@ -1,0 +1,470 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
+import 'package:whynew_new/model/cateoryPageArgs.dart';
+import 'package:whynew_new/provider/appstate.dart';
+import 'package:whynew_new/widget/backButton.dart';
+
+
+class SingleItem extends StatefulWidget {
+  SingleItem({Key key}) : super(key: key);
+
+  @override
+  _SingleItemState createState() => _SingleItemState();
+}
+
+class _SingleItemState extends State<SingleItem> {
+  @override
+  Widget build(BuildContext context) {
+    CategoryPageArgs args = ModalRoute.of(context).settings.arguments;
+    return SafeArea(
+        child: Scaffold(
+      // appBar: AppBar(),
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            BackButtonCustom(),
+            SingleCategoryTitle(args: args),
+            SizedBox(height: 20),
+            CategoryProducts()
+          ],
+        ),
+      ),
+    ));
+  }
+}
+
+class SingleCategoryTitle extends StatelessWidget {
+  const SingleCategoryTitle({
+    Key key,
+    @required this.args,
+  }) : super(key: key);
+
+  final CategoryPageArgs args;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 20, right: 20, top: 0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(args.categoryName, style: Theme.of(context).textTheme.headline4),
+          SvgPicture.asset(
+            args.svgUrl,
+            width: 50,
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class CategoryProducts extends StatefulWidget {
+  const CategoryProducts({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  _CategoryProductsState createState() => _CategoryProductsState();
+}
+
+class _CategoryProductsState extends State<CategoryProducts> {
+  @override
+  Widget build(BuildContext context) {
+    final formKey = GlobalKey<FormState>();
+        final appState = Provider.of<Appstate>(context);
+    return SingleChildScrollView(
+        child: Padding(
+      padding: const EdgeInsets.only(left: 10, right: 10),
+      child: Column(
+        children: [
+          
+          Container(
+              height: 100,
+              width: 100,
+              decoration: BoxDecoration(color: Colors.grey[200]),
+              child: Icon(Icons.laptop, size: 80)),
+          Text("Product Information"),
+          SizedBox(height: 10),
+          Container(
+            height: 50,
+            width: MediaQuery.of(context).size.width,
+            decoration: BoxDecoration(color: Colors.grey[200]),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text("Product Name"),
+                Container(
+                  height: 10,
+                  width: 80,
+                  child: TextFormField(
+                    controller:appState.productNameController,
+                    decoration: InputDecoration(labelText: ''),
+                  ),
+                ),
+                // DropDownButton(),
+              ],
+            ),
+          ),
+          SizedBox(height: 10),
+
+          Form(
+            key:formKey,
+                      child: Container(
+              height: 50,
+              width: MediaQuery.of(context).size.width,
+              decoration: BoxDecoration(color: Colors.grey[200]),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text("RAM"),
+                  SizedBox(width: 30),
+                  Container(
+                    height: 10,
+                    width: 80,
+                    // child: TextFormField(
+                    //   decoration: InputDecoration(labelText: ''),
+                    // ),
+                  ),
+                  SizedBox(width: 10),
+                  DropdownButton<String>(
+                    value: appState.dropDownRam,
+                    icon: Icon(Icons.arrow_downward),
+                    iconSize: 24,
+                    elevation: 16,
+                    style: TextStyle(color: Colors.deepPurple),
+                    // underline: Container(
+
+                    // ),
+                    onChanged: (String newValue) {
+                      setState(() {
+            appState.dropDownValue = newValue;
+          });
+                    },
+                    items: <String>['2GB','4GB','6GB','8GB']
+                        .map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
+                  ),
+                  SizedBox(width: 10),
+                  DropdownButton<String>(
+                    value: 'DDR4',
+                    icon: Icon(Icons.arrow_downward),
+                    iconSize: 24,
+                    elevation: 16,
+                    style: TextStyle(color: Colors.deepPurple),
+                    // underline: Container(
+
+                    // ),
+                    onChanged: (String newValue) {},
+                    items: <String>['DDR4', 'DDR6','DDR6']
+                        .map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          SizedBox(height: 10),
+          Container(
+            height: 50,
+            width: MediaQuery.of(context).size.width,
+            decoration: BoxDecoration(color: Colors.grey[200]),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text("Storage"),
+                Container(
+                  height: 10,
+                  width: 80,
+                  child: TextFormField(
+                    decoration: InputDecoration(labelText: ''),
+                  ),
+                ),
+                // DropDownButton(),
+              ],
+            ),
+          ),
+          SizedBox(height: 10),
+          Container(
+            height: 50,
+            width: MediaQuery.of(context).size.width,
+            decoration: BoxDecoration(color: Colors.grey[200]),
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text("Stock Available"),
+                  Container(
+                      height: 10,
+                      width: 80,
+                      child: TextFormField(
+                        controller:appState.strorageController,
+                        decoration: InputDecoration(labelText: ''),
+                      ))
+                ]
+                ),
+          ),
+          SizedBox(height: 10),
+          Container(
+            height: 50,
+            width: MediaQuery.of(context).size.width ,
+            decoration: BoxDecoration(color: Colors.grey[200]),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text("Price"),
+                // SizedBox(width: 235),
+                Row(
+                  children: [
+                    Text("Rs."),
+                    Container(
+                  height: 10,
+                  width: 60,
+                  child: TextFormField(
+                    controller:appState.priceController,
+                    decoration: InputDecoration(labelText: ''),
+                  ),
+                )
+                  ],
+                ),
+                
+              ],
+            ),
+          ),
+          SizedBox(height: 10),
+          Container(
+            height: 50,
+            width: MediaQuery.of(context).size.width,
+            decoration: BoxDecoration(color: Colors.grey[200]),
+            child: DropdownButton<String>(
+              isExpanded: true,
+              value: appState.dropDownBrand,
+              icon: Icon(Icons.arrow_downward),
+              iconSize: 24,
+              elevation: 16,
+              style: TextStyle(color: Colors.deepPurple),
+              // underline: Container(
+
+              // ),
+              onChanged: (String newValue) {
+                  setState(() {
+            appState.dropDownBrand = newValue;
+          });
+
+              },
+              items: <String>['Lenovo','Dell']
+                  .map<DropdownMenuItem<String>>((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value),
+                );
+              }).toList(),
+            ),
+          ),
+          SizedBox(height: 10),
+          Container(
+            height: 50,
+            width: MediaQuery.of(context).size.width,
+            decoration: BoxDecoration(color: Colors.grey[200]),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text("Model No"),
+                Container(
+                  height: 10,
+                  width: 80,
+                  child: TextFormField(
+                    decoration: InputDecoration(labelText: ''),
+                  ),
+                )
+              ],
+            ),
+          ),
+          SizedBox(height: 10),
+          // DropdownButton<String>(
+          //         isExpanded: true,
+          //         value:dropdownValue ,
+          //         icon: Icon(Icons.arrow_downward),
+          //         iconSize: 30,
+          //         elevation: 16,
+          //         style: TextStyle(color: Colors.deepPurple),
+          //         underline: Container(
+          //           height: 2,
+          //           color: Colors.deepPurpleAccent,
+          //         ),
+          //         onChanged: (String value) {
+          //           setState(() {
+          //             dropdownValue = value;
+          //             appState.dishesByCategory(restaurantName,dropdownValue);
+          //           });
+          //         },
+          //         items: appState.listFoodCategories.map((e) => DropdownMenuItem(value: e.categoryTitle,child:Text(e.categoryTitle))).toList()
+                
+          //       ),
+          Container(
+            height: 50,
+            width: MediaQuery.of(context).size.width,
+            decoration: BoxDecoration(color: Colors.grey[200]),
+            child: DropdownButton<String>(
+              isExpanded: true,
+              value: appState.dropDownCategory,
+              icon: Icon(Icons.arrow_downward),
+              iconSize: 24,
+              elevation: 16,
+              style: TextStyle(color: Colors.deepPurple),
+              // underline: Container(
+
+              // ),
+              onChanged: (String newValue) {setState(() {
+            appState.dropDownCategory = newValue;
+          });},
+              items: <String>['Laptop','Desktop','Headphones']
+                  .map<DropdownMenuItem<String>>((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value),
+                );
+              }).toList(),
+            ),
+          ),
+          SizedBox(height: 10),
+          Container(
+            height: 180,
+            width: MediaQuery.of(context).size.width,
+            decoration: BoxDecoration(color: Colors.grey[200]),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text("Product Description"),
+                    IconButton(icon: Icon(Icons.add_comment), onPressed: null)
+                  ],
+                ),
+                Container(
+                  width: MediaQuery.of(context).size.width,
+                  child: TextFormField(
+                    controller:appState.descriptionController,                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+                    decoration: InputDecoration(labelText: ''),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(height: 20),
+          FlatButton(
+              color: Colors.blue, child: Text("Submit"), 
+              onPressed: (){if(appState.isUpdate==true)
+              {
+                appState.updateProductDetails();
+              }
+              else{
+                try{
+                  appState.addProductDetails();
+                  print("Succesfully done");
+                  Navigator.pushNamed(context,'/productAddConfirmation');
+                }catch (error){
+                  print("error");
+                }
+              }
+                 }),
+          SizedBox(height: 20),
+        ],
+      ),
+    ));
+
+    // Expanded(
+    //   child: ListView(
+    //     children: [
+    //       GridView.count(
+    //         mainAxisSpacing: 15.0,
+    //         crossAxisSpacing: 10.0,
+    //         //childAspectRatio: 0.74,
+    //         childAspectRatio: 0.83,
+
+    //         padding: EdgeInsets.all(10),
+    //         physics: NeverScrollableScrollPhysics(),
+    //         shrinkWrap: true,
+    //         crossAxisCount: 2,
+    //         children: [
+    //          Text("Product Information")
+
+    //         ],
+    //       ),
+    //     ],
+    //   ),
+    // );
+  }
+}
+
+// class MyApp extends StatelessWidget {
+//   static const String _title = 'Flutter Code Sample';
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       title: _title,
+//       home: Scaffold(
+//         appBar: AppBar(title: const Text(_title)),
+//         body: Center(
+//           child: DropDownButton(),
+//         ),
+//       ),
+//     );
+//   }
+// }
+
+// /// This is the stateful widget that the main application instantiates.
+// class DropDownButton extends StatefulWidget {
+//   DropDownButton({Key key}) : super(key: key);
+
+//   @override
+//   _DropDownButtonState createState() => _DropDownButtonState();
+// }
+
+// /// This is the private State class that goes with MyStatefulWidget.
+// class _DropDownButtonState extends State<DropDownButton> {
+//   // appState.dropDownValue = '4GB';
+
+
+//   @override
+//   Widget build(BuildContext context) {
+//       final appState = Provider.of<Appstate>(context);
+//     return Container(
+//       decoration: BoxDecoration(color: Colors.blue[50]),
+//       child: DropdownButton<String>(
+//         value: appState.dropDownValue,
+//         icon: Icon(Icons.arrow_downward),
+//         iconSize: 24,
+//         elevation: 16,
+//         style: TextStyle(color: Colors.deepPurple),
+//         // underline: Container(
+
+//         // ),
+//         onChanged: (String newValue) {
+//           setState(() {
+//             appState.dropDownValue = newValue;
+//           });
+//         },
+//         items: <String>['2GB', '4GB', '8GB', '16GB']
+//             .map<DropdownMenuItem<String>>((String value) {
+//           return DropdownMenuItem<String>(
+//             value: value,
+//             child: Text(value),
+//           );
+//         }).toList(),
+//       ),
+//     );
+//   }
+// }
