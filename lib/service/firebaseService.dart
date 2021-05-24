@@ -422,42 +422,43 @@ Future<bool> addToCart(
     }
     return false;
   }
-  Stream<List<Cart>> fetchCart(String userId) {
-   try{
-    if (userId != null) {
+  // Stream<List<Cart>> fetchCart(String userId) {
+  //  try{
+  //   if (userId != null) {
       
-      print("get cart item stream fired with USer Id: $userId");
-      var response = _db
-          .collection("cart/$userId/cartProducts")
-          .snapshots();
-      return response.map((e) => e.docs.map((e)=>Cart.fromSnapshot(e)).toList());
-    } else {
-      return null;
-    }
-    }catch(error){
-      print(" error on fetch cart $error");
-    }
-    // return true;
-    
-  }
-
-  // Stream<List<Cart>> fetchCart(String userId,)  {
+  //     print("get cart item stream fired with USer Id: $userId");
+  //     var response = _db
+  //         .collection("cart/$userId/cartProducts")
+  //         .snapshots();
+  //         print("$response");
+  //     return response.map((e) => e.docs.map((e)=>Cart.fromSnapshot(e)).toList());
+  //   } else {
+  //     return null;
+  //   }
+  //   }catch(error){
+  //     print(" error on fetch cart $error");
+  //   }
   
     
-  //     try {
-  //         var response =  _db
-  //       .collection("cart/$userId/cartProducts")
-  //       .snapshots();
-  //       print("CustomerCart $response");
-  //   //          // response.docs.forEach((element) {print(element.data());});
-  //   //  return[UserAddress()];
-  //       return response.map((e) => e.docs.map((e)=>Cart.fromSnapshot(e)).toList());
-  //     } catch (error) {
-  //       print("something wrong $error");
-  //       return null;
-  //     }
-   
   // }
+
+  Stream<List<Cart>> fetchCart(String userId,)  {
+  
+    
+      try {
+          var response =  _db
+        .collection("cart/$userId/cartProducts")
+        .snapshots();
+        print("CustomerCart $response");
+    //          // response.docs.forEach((element) {print(element.data());});
+    //  return[UserAddress()];
+        return response.map((e) => e.docs.map((e)=>Cart.fromSnapshot(e)).toList());
+      } catch (error) {
+        print("something wrong $error");
+        return null;
+      }
+   
+  }
  
 
  Future<void>updateStock(String userId,String productId,bool isAdd,String currentQty)async{
@@ -591,17 +592,17 @@ Future<List<Dealer>>nonApprovedDealers( )async{
           }
   }
 }
-// Future<List<Dealer>>approveDealerProducts( )async{
-//   {
-//     try{
-//       var response = await _db.collection("products").where("status",isEqualTo: false).get();
-//     return response.docs.map((e) => Dealer.fromSnapshot(e)).toList();
-//       }catch (error) {
-//       print("$error");
-//       return null;
-//           }
-//   }
-// }
+Future<List<Dealer>>approveDealerProducts( )async{
+  {
+    try{
+      var response = await _db.collection("products").where("status",isEqualTo: false).get();
+    return response.docs.map((e) => Dealer.fromSnapshot(e)).toList();
+      }catch (error) {
+      print("$error");
+      return null;
+          }
+  }
+}
 
 Future<bool> updateDealerStatus(Dealer dealerDetails,String dealerId) {
   { 

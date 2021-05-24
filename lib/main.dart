@@ -68,9 +68,9 @@ class Whynew extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: "Whynew",
         //  home: WelcomePage(),
-        //home: LandingPage(),
-        //  home: NavigationPage(),
-         home: LandingPage(),
+        // home: LandingPage(),
+         home: NavigationPage(),
+        //  home: LandingPage(),
         // home:DealerProfile(),
         routes: <String, WidgetBuilder>{
           '/home': (BuildContext context) => NavigationPage(),

@@ -27,8 +27,8 @@ class _HomepageState extends State<Homepage> {
   Widget build(BuildContext context) {
     final appState = Provider.of<Appstate>(context);
     // print("here is the customer id${widget.userData.userId}");
-     print("here is the   ${FirebaseAuth.instance.currentUser.uid}");
-     print("user Id is here rom appState ${appState.userId}");
+    //  print("here is the   ${FirebaseAuth.instance.currentUser.uid}");
+    //  print("user Id is here rom appState ${appState.userId}");
     return SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: Column(

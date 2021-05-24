@@ -54,7 +54,7 @@ class _CartPageState extends State<CartPage> {
             children: [
               ButtonWithIcon(title: 'Checkout',isHalfPage: true,iconVisible: true,
               onPressed:(){ 
-                // print("arguments product ${args.productName}");
+                print("arguments product ${args.productName}");
               var orderObject=Order(customerAddress: CustomerOrderAddress(area: "",customerLatLng:
            GeoPoint(1,1),houseNo:"6767" ,landMark: "Panjim",location: "",),userId: appState.userId,userContact: "",userName: "",email: "abc",
            orderItems:appState.cartDetail.map((e)=>OrderItems(productImg: e.imgUrl,productId:e.productId,productName: e.productName,productQty: e.productQty.toString(),

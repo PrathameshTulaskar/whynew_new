@@ -323,8 +323,10 @@ class BottomButtonsProductPage extends StatelessWidget {
 
       children: [ChatButton(),Visibility(
         child: AddToCartBtn(onPressed:(){
-     
+                     print("${product.productId}");
                   appState.addToCart(product,product.productId);
+                  
+                  print("$product");
                   arguments:Product(productId:product.productId,productName:args.productName,dealerId:args.dealerId,price:args.price,imgUrl:args.imgUrl,);
                   print("productdetailsabcdegffffgf   ${product.productId}");
                 

@@ -29,7 +29,8 @@ class Appstate extends ChangeNotifier{
   //     notifyListeners();
   // }
 // var userId=FirebaseAuth.instance.currentUser.uid;
-  var _userId = FirebaseAuth.instance.currentUser.uid;
+  var _userId = "F3Z4I6dNe2SkxW8rMC9ka4xOTU62";
+  // var _userId = FirebaseAuth.instance.currentUser.uid;
   get userId => _userId;
   
   // get userId => _userId;
@@ -209,7 +210,10 @@ class Appstate extends ChangeNotifier{
       "App State initialized"
 
     );
-    // addGuest();
+    print("userid is $userId");
+    print("print cartdetail length ${cartDetail.length}");
+    fetchCustomerDetails();
+    addGuest();
     recentlyPurchased();
     // soldProducts();
     // fetchCustomerList();
@@ -222,8 +226,9 @@ class Appstate extends ChangeNotifier{
     // updateProductDetails();
     // addOrder(orderDetails,userId);
 // addCustomer();
-      // fetchCart("$userId");
-   fetchCart();
+      fetchCart();
+  
+  //  addToCart(productList,"");
     fetchCustomerDetails();
     fetchDealerDetails();
     fetchProductCategory();
@@ -239,7 +244,6 @@ class Appstate extends ChangeNotifier{
   }
 
   Future<void> fetchCurrentLocation() async {
-    print("CURRENT LOCATION FETCH");
     try {
       // locationPermission.Location.instance.requestPermission();
       // var currentPos = await Geolocator().getCurrentPosition(
@@ -518,13 +522,13 @@ isApproved:true
       print("${_dealerList.length} dealerList Lenth");
       return _dealerList;   
   }
-//  Future<List<Dealer>> approveDealerProducts() async {
-//     print("fetchProducts AppState:");
+ Future<List<Dealer>> approveDealerProducts() async {
+    print("fetchProducts AppState:");
 
-//       _dealerList = await firebaseService.approveDealerProducts();
-//       print("${_dealerList.length} dealerList Lenth");
-//       return _dealerList;   
-//   }
+      _dealerList = await firebaseService.approveDealerProducts();
+      print("${_dealerList.length} dealerList Lenth");
+      return _dealerList;   
+  }
 
    Future<void> fetchDealerDetails() async 
   {
@@ -623,6 +627,7 @@ Future<List<Order>> fetchOrder() async {
 //////////////////////////////////////cart///////////////////////////
 
 Future<void> addToCart(Product productDetails,String productId) async {
+
     try {
     
       var cartDetails = Cart(
@@ -639,7 +644,9 @@ Future<void> addToCart(Product productDetails,String productId) async {
         price: productDetails.price,
         imgUrl:productDetails.imgUrl,
       );
+      print("product Addded sucessfully");
       return await firebaseService.addToCart(cartDetails,userId,productId);
+      
     } catch (e) {
      
       return null;
@@ -678,7 +685,8 @@ Future<void> fetchCart() async {
 // Future<void> fetchCart(String customerId) async {
 //      print("fetchOrders AppState:");
 
-//    _cartDetail = await firebaseService.fetchCart();
+//    var result = await firebaseService.fetchCart(userId);
+//    print(result.length);
 //    print("${_orderList[0].orderItems.length} order list is here");
 //    notifyListeners();
 //     return _orderList;
